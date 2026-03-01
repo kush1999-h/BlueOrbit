@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f8ff;
+  --foreground: #0b1220;
+  --orbit-dark: #f4f8ff;
+  --orbit-darker: #eaf2ff;
+  --orbit-card: rgba(255, 255, 255, 0.8);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+html.light {
+  --background: #f4f8ff;
+  --foreground: #0b1220;
+  --orbit-dark: #f4f8ff;
+  --orbit-darker: #eaf2ff;
+  --orbit-card: rgba(255, 255, 255, 0.85);
+  color-scheme: light;
+}
+
+html.dark {
+  --background: #030712;
+  --foreground: #e5f7ff;
+  --orbit-dark: #0a0e27;
+  --orbit-darker: #050811;
+  --orbit-card: rgba(10, 14, 39, 0.8);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.light .text-white {
+  color: #0b1220 !important;
+}
+
+html.light .text-gray-300 {
+  color: #334155 !important;
+}
+
+html.light .text-gray-400 {
+  color: #475569 !important;
+}
+
+html.light .text-gray-500 {
+  color: #64748b !important;
+}
+
+html.light .bg-orbit-card {
+  backdrop-filter: blur(2px);
+}
+
+::selection {
+  @apply bg-cyan-500 text-white;
+}
