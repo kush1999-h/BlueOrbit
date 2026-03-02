@@ -1,4 +1,7 @@
-﻿import {
+"use client";
+
+import clsx from "clsx";
+import {
   Boxes,
   Calculator,
   Clock3,
@@ -10,6 +13,7 @@
   Users,
   type LucideIcon,
 } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
 type ModuleTile = {
   title: string;
@@ -69,35 +73,83 @@ type ModulesGridProps = {
   modules?: ModuleTile[];
 };
 
+const accentMap = [
+  "from-cyan-400/30 to-sky-500/20",
+  "from-blue-400/30 to-cyan-500/20",
+  "from-teal-400/30 to-cyan-500/20",
+  "from-indigo-400/30 to-blue-500/20",
+];
+
+const shapeMap = [
+  "rounded-[1.5rem]",
+  "rounded-[1.5rem] rounded-tr-[3rem]",
+  "rounded-[1.5rem] rounded-bl-[3rem]",
+  "rounded-[2.25rem] rounded-br-[0.75rem]",
+];
+
 export function ModulesGrid({ modules = defaultModules }: ModulesGridProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
-    <section className="bg-orbit-darker py-16 md:py-24">
+    <section className={clsx("py-16 md:py-24", isDark ? "bg-orbit-darker" : "bg-slate-100")}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl">
+          <h2 className={clsx("mb-4 text-4xl font-bold md:text-5xl", isDark ? "text-white" : "text-slate-900")}>
             Modules Spotlight
           </h2>
-          <p className="text-gray-400">
-            Every module your business needs, unified in one ERP.
+          <p className={clsx("mx-auto max-w-2xl", isDark ? "text-gray-400" : "text-slate-600")}>
+            Business modules arranged into one connected ERP backbone.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {modules.map((module) => (
-            <div
-              key={module.title}
-              className="group rounded-xl border border-cyan-500/30 bg-orbit-card p-8 text-center transition hover:border-cyan-400/60 hover:bg-orbit-card/80 hover:shadow-glow-cyan"
-            >
-              <div className="mb-4 inline-flex rounded-lg border border-cyan-400/40 bg-cyan-400/10 p-3 text-cyan-300 transition group-hover:scale-105">
-                <module.icon className="h-7 w-7" />
-              </div>
-              <h3 className="mb-2 text-lg font-bold text-white">{module.title}</h3>
-              <p className="text-sm text-gray-400">{module.benefit}</p>
-            </div>
-          ))}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {modules.map((module, idx) => {
+            const accent = accentMap[idx % accentMap.length];
+            const shape = shapeMap[idx % shapeMap.length];
+            const isFeatured = idx % 3 === 0;
+
+            return (
+              <article
+                key={module.title}
+                className={clsx(
+                  "group relative overflow-hidden border p-6 transition duration-300 hover:-translate-y-1",
+                  shape,
+                  isDark
+                    ? isFeatured
+                      ? "border-cyan-300/50 bg-orbit-card hover:border-cyan-200/80"
+                      : "border-cyan-500/30 bg-orbit-card hover:border-cyan-300/70"
+                    : isFeatured
+                      ? "border-cyan-700/35 bg-white hover:border-cyan-700/55"
+                      : "border-slate-200 bg-white hover:border-cyan-700/35",
+                )}
+              >
+                <div className={clsx("pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br blur-xl", accent)} />
+                <div
+                  className={clsx(
+                    "pointer-events-none absolute -bottom-10 -left-10 h-28 w-28 rounded-full blur-lg",
+                    isDark ? "bg-cyan-400/10" : "bg-cyan-500/10",
+                  )}
+                />
+
+                <div
+                  className={clsx(
+                    "mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border transition group-hover:-translate-y-0.5",
+                    isDark
+                      ? "border-cyan-400/45 bg-cyan-400/10 text-cyan-300"
+                      : "border-cyan-700/25 bg-cyan-100 text-cyan-800",
+                  )}
+                >
+                  <module.icon className="h-6 w-6" />
+                </div>
+
+                <h3 className={clsx("mb-2 text-lg font-semibold", isDark ? "text-white" : "text-slate-900")}>{module.title}</h3>
+                <p className={clsx("text-sm leading-6", isDark ? "text-gray-300" : "text-slate-600")}>{module.benefit}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
-

@@ -14,8 +14,8 @@
       </feMerge>
     </filter>
     <linearGradient id="neon" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#5b9be0"/>
-      <stop offset="1" stop-color="#2c6fb7"/>
+      <stop offset="0" stop-color="#6ff6ff"/>
+      <stop offset="1" stop-color="#00c7ff"/>
     </linearGradient>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
       <feGaussianBlur stdDeviation="3.25" result="b"/>
@@ -26,8 +26,8 @@
     </filter>
   </defs>
   <g id="wordmark" filter="url(#textGlow)" transform="matrix(1.6898460388183594, 0, 0, 1.6613579988479614, -1499.164306640625, -364.5820007324219)" style="">
-    <text x="197.553" y="305" font-family="Montserrat, Poppins, Inter, Arial, sans-serif" font-size="118" font-weight="700" letter-spacing="22" fill="#3f7fc8" opacity="0.95" style="white-space: pre; font-size: 118px;">BLUE</text>
-    <text x="1033.9" y="305" font-family="Montserrat, Poppins, Inter, Arial, sans-serif" font-size="118" font-weight="700" letter-spacing="22" fill="#3f7fc8" opacity="0.95" style="white-space: pre; font-size: 118px;">ORBIT</text>
+    <text x="197.553" y="305" font-family="Montserrat, Poppins, Inter, Arial, sans-serif" font-size="118" font-weight="700" letter-spacing="22" fill="#66d9ff" opacity="0.95" style="white-space: pre; font-size: 118px;">BLUE</text>
+    <text x="1033.9" y="305" font-family="Montserrat, Poppins, Inter, Arial, sans-serif" font-size="118" font-weight="700" letter-spacing="22" fill="#66d9ff" opacity="0.95" style="white-space: pre; font-size: 118px;">ORBIT</text>
   </g>
   <g id="planet-icon" filter="url(#glow)" stroke="url(#neon)" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" transform="matrix(1.6898460388183594, 0, 0, 1.6613579988479614, -1499.164306640625, -364.5820007324219)" style="">
     <circle id="planet" cx="805" cy="260" r="118" opacity="0.98"/>
@@ -38,3 +38,4 @@
     <path id="highlight-mid" d="M 901.208 255.237 C 903.958 268.429 903.958 282.045 901.208 295.237" opacity="0.65"/>
   </g>
 </svg>
+

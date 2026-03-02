@@ -46,6 +46,13 @@ html.light .text-white {
   color: #0b1220 !important;
 }
 
+html.light a.text-white,
+html.light button.text-white,
+html.light .bg-slate-900.text-white,
+html.light .bg-gradient-to-r.text-white {
+  color: #ffffff !important;
+}
+
 html.light .text-gray-300 {
   color: #334155 !important;
 }
@@ -64,4 +71,91 @@ html.light .bg-orbit-card {
 
 ::selection {
   @apply bg-cyan-500 text-white;
+}
+
+/* Section reveal animations */
+.reveal {
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  filter: blur(8px);
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 700ms var(--reveal-ease),
+    transform 700ms var(--reveal-ease),
+    filter 700ms var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform, opacity;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.reveal-slide-left {
+  transform: translate3d(34px, 0, 0);
+}
+
+.reveal-slide-right {
+  transform: translate3d(-34px, 0, 0);
+}
+
+.reveal-zoom-in {
+  transform: translate3d(0, 12px, 0) scale(0.975);
+}
+
+.reveal-tilt-up {
+  transform: perspective(900px) rotateX(6deg) translate3d(0, 24px, 0);
+  transform-origin: center bottom;
+}
+
+.reveal-blur-in {
+  filter: blur(14px);
+  transform: translate3d(0, 0, 0) scale(0.985);
+}
+
+.reveal-pop-in {
+  transform: translate3d(0, 16px, 0) scale(0.94);
+}
+
+.reveal-lift {
+  transform: translate3d(0, 34px, 0);
+}
+
+@keyframes heroProgress {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-slide-left,
+  .reveal-slide-right,
+  .reveal-zoom-in,
+  .reveal-tilt-up,
+  .reveal-blur-in,
+  .reveal-pop-in,
+  .reveal-lift {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

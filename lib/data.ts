@@ -3,23 +3,27 @@
 export const HERO_SLIDES = [
   {
     title: "Odoo ERP Implementation",
-    support: "From discovery to go-live and training.",
+    support: "Clear roadmap, clean deployment, and confident go-live.",
     image: "/placeholders/slide-1.svg",
+    video: "/hero-s1.mp4",
   },
   {
-    title: "Modules That Fit Your Business",
-    support: "Accounting, Inventory, Sales, HR, POS, MRP, eCommerce.",
+    title: "Modules Aligned to Your Workflow",
+    support: "Accounting, Inventory, Sales, HR, POS, MRP, and eCommerce configured for your operations.",
     image: "/placeholders/slide-2.svg",
+    video: "/hero-s2.mp4",
   },
   {
-    title: "Secure Hosting & DevOps",
-    support: "Backups, monitoring, CI/CD, performance tuning.",
+    title: "Reliable Cloud & DevOps",
+    support: "High-availability hosting, backups, monitoring, CI/CD, and performance tuning.",
     image: "/placeholders/slide-3.svg",
+    video: "/hero-s3.mp4",
   },
   {
-    title: "Data Analytics & Forecasting",
-    support: "Dashboards and personalized prediction models powered by your ERP data.",
+    title: "Analytics & Predictive Intelligence",
+    support: "Executive dashboards and forecasting models powered by your ERP data.",
     image: "/placeholders/slide-4.svg",
+    video: "/hero-s4.mp4",
   },
 ] as const;
 

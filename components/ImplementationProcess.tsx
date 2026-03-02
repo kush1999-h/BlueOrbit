@@ -1,4 +1,8 @@
-﻿import { CheckCircle } from "lucide-react";
+"use client";
+
+import clsx from "clsx";
+import { CheckCircle2 } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
 interface ProcessStep {
   step: number;
@@ -7,139 +11,89 @@ interface ProcessStep {
 }
 
 const steps: ProcessStep[] = [
-  {
-    step: 1,
-    title: "Discovery Workshop",
-    description: "Understand your business processes and requirements",
-  },
-  {
-    step: 2,
-    title: "Solution Blueprint",
-    description: "Design the tailored solution for your needs",
-  },
-  {
-    step: 3,
-    title: "Configuration & Data Migration",
-    description: "Set up modules and migrate your business data",
-  },
-  {
-    step: 4,
-    title: "Custom Development",
-    description: "Build custom features and integrations if needed",
-  },
-  {
-    step: 5,
-    title: "Testing & UAT",
-    description: "Comprehensive testing with your team",
-  },
-  {
-    step: 6,
-    title: "Go-Live",
-    description: "Launch your new Odoo system into production",
-  },
-  {
-    step: 7,
-    title: "Ongoing Support",
-    description: "Continuous support and optimization",
-  },
+  { step: 1, title: "Discovery Workshop", description: "Map goals, scope, and constraints." },
+  { step: 2, title: "Solution Blueprint", description: "Design process and module plan." },
+  { step: 3, title: "Configuration & Migration", description: "Set up modules and import data." },
+  { step: 4, title: "Custom Development", description: "Build required custom features." },
+  { step: 5, title: "Testing & UAT", description: "Validate with business stakeholders." },
+  { step: 6, title: "Go-Live", description: "Launch with controlled transition." },
+  { step: 7, title: "Ongoing Support", description: "Optimize, train, and support teams." },
+];
+
+const benefits = [
+  { title: "Faster Time to Value", desc: "Phased execution keeps deployment momentum high." },
+  { title: "Reduced Delivery Risk", desc: "Milestones and checkpoints keep implementation controlled." },
+  { title: "High Team Adoption", desc: "Training and UAT ensure confidence before go-live." },
 ];
 
 export function ImplementationProcess() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
-    <section className="py-16 md:py-24 bg-orbit-darker">
+    <section className={clsx("py-16 md:py-24", isDark ? "bg-orbit-darker" : "bg-slate-100")}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Our Implementation Process
-          </h2>
-          <p className="text-gray-400">
-            A structured methodology ensuring successful deployment
+        <div className="mb-12 text-center">
+          <h2 className={clsx("mb-4 text-4xl font-bold md:text-5xl", isDark ? "text-white" : "text-slate-900")}>Our Implementation Process</h2>
+          <p className={clsx("mx-auto max-w-3xl", isDark ? "text-gray-400" : "text-slate-600")}>
+            A compact 7-step delivery flow from discovery to long-term support.
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Mobile: Vertical timeline */}
-          <div className="md:hidden">
-            <div className="space-y-6">
-              {steps.map((item) => (
-                <div key={item.step} className="relative pl-8">
-                  {/* Timeline dot and line */}
-                  <div className="absolute -left-2 top-0 h-6 w-6 rounded-full border-2 border-cyan-400 bg-orbit-dark" />
-                  {item.step < steps.length && (
-                    <div className="absolute left-1 top-6 w-0.5 h-12 bg-gradient-to-b from-cyan-400/60 to-cyan-400/20" />
-                  )}
+        <div
+          className={clsx(
+            "mb-8 hidden h-px w-full xl:block",
+            isDark ? "bg-gradient-to-r from-cyan-300/10 via-cyan-300/50 to-cyan-300/10" : "bg-gradient-to-r from-cyan-700/10 via-cyan-700/45 to-cyan-700/10",
+          )}
+        />
 
-                  {/* Content */}
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-bold text-cyan-300">
-                        Step {item.step}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-white">{item.title}</h3>
-                    <p className="text-sm text-gray-400">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="flex gap-3 overflow-x-auto pb-1 md:snap-x md:snap-mandatory xl:grid xl:grid-cols-7 xl:overflow-visible">
+          {steps.map((item) => (
+            <article
+              key={item.step}
+              className={clsx(
+                "group relative min-w-[220px] snap-start overflow-hidden rounded-xl border p-4 pt-7 transition duration-300 hover:-translate-y-0.5 md:min-w-[260px] xl:min-w-0",
+                isDark
+                  ? "border-cyan-500/30 bg-orbit-card hover:border-cyan-300/60"
+                  : "border-slate-200 bg-white hover:border-cyan-700/30",
+              )}
+            >
+              <div
+                className={clsx(
+                  "pointer-events-none absolute -left-px -top-px h-5 w-5 rounded-br-md",
+                  isDark ? "bg-orbit-darker" : "bg-slate-100",
+                )}
+              />
+              <span
+                className={clsx(
+                  "absolute left-3 top-2 text-xs font-bold tracking-[0.04em]",
+                  isDark ? "text-cyan-300/85" : "text-cyan-800/85",
+                )}
+              >
+                {String(item.step).padStart(2, "0")}
+              </span>
 
-          {/* Desktop: Horizontal timeline */}
-          <div className="hidden md:block">
-            <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 relative">
-              {/* Connecting line */}
-              <div className="absolute -top-12 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400/20 via-cyan-400/60 to-cyan-400/20 hidden lg:block" />
+              <h3 className={clsx("mb-1 text-sm font-semibold leading-5", isDark ? "text-white" : "text-slate-900")}>{item.title}</h3>
 
-              {steps.map((item) => (
-                <div key={item.step} className="flex flex-col items-center">
-                  {/* Step Circle */}
-                  <div className="relative mb-4 z-10">
-                    <div className="h-14 w-14 rounded-full border-3 border-cyan-400 bg-orbit-dark flex items-center justify-center">
-                      <span className="font-bold text-cyan-300 text-lg">
-                        {item.step}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="text-center">
-                    <h3 className="font-bold text-white mb-2 text-sm">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-gray-400">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+              <p className={clsx("text-xs leading-5", isDark ? "text-gray-300" : "text-slate-600")}>Outcome: {item.description}</p>
+            </article>
+          ))}
         </div>
 
-        {/* Key Benefits */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              title: "Faster Time to Value",
-              desc: "Go live in weeks, not months",
-            },
-            {
-              title: "Reduced Risk",
-              desc: "Proven methodology minimizes implementation risks",
-            },
-            {
-              title: "Maximum Adoption",
-              desc: "Proper training ensures team buy-in",
-            },
-          ].map((benefit, idx) => (
+        <div className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-3">
+          {benefits.map((benefit) => (
             <div
-              key={idx}
-              className="flex items-start gap-3 rounded-lg border border-cyan-500/30 bg-orbit-card p-4"
+              key={benefit.title}
+              className={clsx(
+                "rounded-xl border p-3.5",
+                isDark ? "border-cyan-500/30 bg-orbit-card" : "border-slate-200 bg-white",
+              )}
             >
-              <CheckCircle className="h-6 w-6 text-cyan-400 flex-shrink-0 mt-1" />
-              <div>
-                <h4 className="font-bold text-white">{benefit.title}</h4>
-                <p className="text-sm text-gray-400">{benefit.desc}</p>
+              <div className={clsx("mb-2 inline-flex items-center gap-2", isDark ? "text-cyan-300" : "text-cyan-800")}>
+                <CheckCircle2 className="h-4 w-4" />
+                <h4 className={clsx("text-sm font-semibold", isDark ? "text-white" : "text-slate-900")}>{benefit.title}</h4>
               </div>
+              <p className={clsx("text-xs", isDark ? "text-gray-400" : "text-slate-600")}>{benefit.desc}</p>
             </div>
           ))}
         </div>
@@ -147,4 +101,3 @@ export function ImplementationProcess() {
     </section>
   );
 }
-
