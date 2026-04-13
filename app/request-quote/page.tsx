@@ -1,5 +1,4 @@
-﻿import { ClipboardList, ShieldCheck, Zap } from "lucide-react";
-import { Footer } from "@/components/Footer";
+﻿import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { QuoteForm } from "@/components/QuoteForm";
 import { InfoCard } from "@/components/InfoCard";
@@ -13,17 +12,17 @@ export const metadata = {
 export default function RequestQuote() {
   const infoCards = [
     {
-      icon: Zap,
+      icon: "zap",
       title: "Fast Response",
       desc: "We get back to you within 24-48 hours.",
     },
     {
-      icon: ClipboardList,
+      icon: "clipboard-list",
       title: "Detailed Proposal",
       desc: "Custom quote tailored to your requirements.",
     },
     {
-      icon: ShieldCheck,
+      icon: "shield-check",
       title: "No Spam",
       desc: "Only relevant project communication.",
     },

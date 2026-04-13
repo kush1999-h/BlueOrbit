@@ -1,18 +1,30 @@
 "use client";
 
 import clsx from "clsx";
-import type { LucideIcon } from "lucide-react";
+import {
+  Zap,
+  ClipboardList,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 
 interface InfoCardProps {
-  icon: LucideIcon;
+  icon: string;
   title: string;
   desc: string;
 }
 
-export function InfoCard({ icon: Icon, title, desc }: InfoCardProps) {
+const iconMap: { [key: string]: LucideIcon } = {
+  zap: Zap,
+  "clipboard-list": ClipboardList,
+  "shield-check": ShieldCheck,
+};
+
+export function InfoCard({ icon: iconName, title, desc }: InfoCardProps) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const Icon = iconMap[iconName] || Zap;
 
   return (
     <div className="ui-card rounded-xl p-4 text-center">
