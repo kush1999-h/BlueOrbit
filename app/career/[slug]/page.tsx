@@ -2,6 +2,7 @@
 import { ArrowLeft, Briefcase, Building2, Check, MapPin } from "lucide-react";
 import { CTABanner } from "@/components/CTABanner";
 import { Footer } from "@/components/Footer";
+import { JobApplyForm } from "@/components/JobApplyForm";
 import { Navbar } from "@/components/Navbar";
 
 export const generateStaticParams = () => [
@@ -132,8 +133,8 @@ const jobsData: Record<
 };
 
 export const metadata = {
-  title: "Job Details | Blubit Career",
-  description: "Apply for open positions at Blubit.",
+  title: "Job Details | Blue Orbit Careers",
+  description: "Apply for open positions at Blue Orbit Solutions.",
 };
 
 export default async function JobDetail({ params }: { params: Promise<{ slug: string }> }) {
@@ -144,9 +145,9 @@ export default async function JobDetail({ params }: { params: Promise<{ slug: st
     return (
       <>
         <Navbar />
-        <div className="min-h-screen bg-orbit-dark px-4 pb-24 pt-32 text-center sm:px-6 lg:px-8">
-          <h1 className="mb-4 text-4xl font-bold text-white">Job Not Found</h1>
-          <p className="mb-8 text-gray-400">The role may have been closed or moved.</p>
+        <div className="bg-ui-page min-h-screen px-4 pb-24 pt-32 text-center sm:px-6 lg:px-8">
+          <h1 className="text-ui-heading mb-4 text-4xl font-bold">Job Not Found</h1>
+          <p className="text-ui-muted mb-8">The role may have been closed or moved.</p>
           <Link
             href="/career"
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-400 px-6 py-3 font-semibold text-white"
@@ -162,14 +163,14 @@ export default async function JobDetail({ params }: { params: Promise<{ slug: st
   return (
     <>
       <Navbar />
-      <main className="bg-orbit-dark">
-        <section className="border-b border-cyan-500/20 px-4 pb-12 pt-32 sm:px-6 lg:px-8">
+      <main className="bg-ui-page">
+        <section className="border-ui border-b px-4 pb-12 pt-32 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <Link href="/career" className="mb-6 inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200">
+            <Link href="/career" className="text-ui-link mb-6 inline-flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" /> Back to Careers
             </Link>
-            <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">{job.title}</h1>
-            <div className="flex flex-wrap gap-4 text-gray-300">
+            <h1 className="text-ui-heading mb-4 text-4xl font-bold md:text-5xl">{job.title}</h1>
+            <div className="text-ui-body flex flex-wrap gap-4">
               <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-cyan-300" /> {job.location}</span>
               <span className="inline-flex items-center gap-2"><Briefcase className="h-4 w-4 text-cyan-300" /> {job.type}</span>
               <span className="inline-flex items-center gap-2"><Building2 className="h-4 w-4 text-cyan-300" /> {job.department}</span>
@@ -177,19 +178,19 @@ export default async function JobDetail({ params }: { params: Promise<{ slug: st
           </div>
         </section>
 
-        <section className="bg-orbit-darker px-4 py-12 sm:px-6 lg:px-8">
+        <section className="bg-ui-surface px-4 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
-            <div className="mb-8 rounded-xl border border-cyan-500/30 bg-orbit-card p-8">
-              <h2 className="mb-4 text-2xl font-bold text-white">About the Role</h2>
-              <p className="text-gray-300">{job.description}</p>
+            <div className="ui-card mb-8 rounded-xl p-8">
+              <h2 className="text-ui-heading mb-4 text-2xl font-bold">About the Role</h2>
+              <p className="text-ui-body">{job.description}</p>
             </div>
 
             <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
-              <div className="rounded-xl border border-cyan-500/30 bg-orbit-card p-6">
+              <div className="ui-card rounded-xl p-6">
                 <h3 className="mb-4 text-xl font-bold text-cyan-300">Requirements</h3>
                 <ul className="space-y-2">
                   {job.requirements.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-gray-300">
+                    <li key={item} className="text-ui-body flex items-start gap-3">
                       <span className="mt-1 h-2 w-2 rounded-full bg-cyan-400" />
                       {item}
                     </li>
@@ -197,11 +198,11 @@ export default async function JobDetail({ params }: { params: Promise<{ slug: st
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-cyan-500/30 bg-orbit-card p-6">
+              <div className="ui-card rounded-xl p-6">
                 <h3 className="mb-4 text-xl font-bold text-cyan-300">Responsibilities</h3>
                 <ul className="space-y-2">
                   {job.responsibilities.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-gray-300">
+                    <li key={item} className="text-ui-body flex items-start gap-3">
                       <span className="mt-1 h-2 w-2 rounded-full bg-cyan-400" />
                       {item}
                     </li>
@@ -210,11 +211,11 @@ export default async function JobDetail({ params }: { params: Promise<{ slug: st
               </div>
             </div>
 
-            <div className="mb-8 rounded-xl border border-cyan-500/30 bg-orbit-card p-6">
+            <div className="ui-card mb-8 rounded-xl p-6">
               <h3 className="mb-4 text-xl font-bold text-cyan-300">Benefits</h3>
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 {job.benefits.map((item) => (
-                  <div key={item} className="flex items-start gap-3 text-gray-300">
+                  <div key={item} className="text-ui-body flex items-start gap-3">
                     <Check className="h-5 w-5 text-cyan-300" />
                     {item}
                   </div>
@@ -222,15 +223,12 @@ export default async function JobDetail({ params }: { params: Promise<{ slug: st
               </div>
             </div>
 
-            <div className="rounded-xl border border-cyan-500/30 bg-orbit-card p-8 text-center">
-              <h3 className="mb-4 text-2xl font-bold text-white">Ready to Apply?</h3>
-              <p className="mb-6 text-gray-300">Send your resume and brief cover letter to our hiring team.</p>
-              <a
-                href={`mailto:careers@blubit.com?subject=Application: ${job.title}`}
-                className="inline-block rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-400 px-8 py-3 font-semibold text-white transition hover:shadow-glow-cyan-lg"
-              >
-                Apply by Email
-              </a>
+            <div className="ui-card rounded-xl p-8">
+              <h3 className="text-ui-heading mb-2 text-2xl font-bold">Ready to Apply?</h3>
+              <p className="text-ui-body mb-6">
+                Submit your details below for this role and our team will review your application.
+              </p>
+              <JobApplyForm jobSlug={slug} jobTitle={job.title} />
             </div>
           </div>
         </section>

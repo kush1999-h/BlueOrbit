@@ -1,140 +1,309 @@
-﻿import type { Job, ModuleItem, ProofStat, Service, TeamMember, Testimonial } from "@/types/content";
+import type {
+  Job,
+  ModuleItem,
+  ProofStat,
+  Service,
+  TeamMember,
+  Testimonial,
+} from "@/types/content";
 
 export const HERO_SLIDES = [
   {
-    title: "Odoo ERP Implementation",
-    support: "Clear roadmap, clean deployment, and confident go-live.",
+    title: "Odoo ERP Sales, Supply & Implementation",
+    support:
+      "From requirement analysis and configuration to training and go-live support.",
     image: "/placeholders/slide-1.svg",
     video: "/hero-s1.mp4",
+    panelTitle: "ERP delivery with local execution",
+    panelItems: [
+      "Discovery workshops",
+      "Configuration & migration",
+      "Training & support",
+    ],
   },
   {
-    title: "Modules Aligned to Your Workflow",
-    support: "Accounting, Inventory, Sales, HR, POS, MRP, and eCommerce configured for your operations.",
+    title: "Software, Website & Custom Platform Delivery",
+    support:
+      "Business applications, web platforms, integrations, and tailored digital systems.",
     image: "/placeholders/slide-2.svg",
     video: "/hero-s2.mp4",
+    panelTitle: "Digital systems built around operations",
+    panelItems: [
+      "Business software",
+      "Corporate websites",
+      "Integrated portals",
+    ],
   },
   {
-    title: "Reliable Cloud & DevOps",
-    support: "High-availability hosting, backups, monitoring, CI/CD, and performance tuning.",
+    title: "Infrastructure, Cloud & Security Operations",
+    support:
+      "DevOps, storage, servers, cloud solutions, audits, and secure enterprise deployments.",
     image: "/placeholders/slide-3.svg",
     video: "/hero-s3.mp4",
+    panelTitle: "Enterprise reliability and cloud readiness",
+    panelItems: ["Server & storage", "Cloud & DevOps", "Cyber audit"],
   },
   {
-    title: "Analytics & Predictive Intelligence",
-    support: "Executive dashboards and forecasting models powered by your ERP data.",
+    title: "Strategic Technology Partnerships",
+    support:
+      "Beyond62, GalaxySpace, Huawei cloud solutions, and enterprise technology delivery for Bangladesh.",
     image: "/placeholders/slide-4.svg",
     video: "/hero-s4.mp4",
+    panelTitle: "Regional partnerships for specialized delivery",
+    panelItems: [
+      "Satellite IoT",
+      "Huawei solutions",
+      "Bangladesh market execution",
+    ],
+  },
+] as const;
+
+export const AUTHORITY_ITEMS = [
+  {
+    name: "Odoo",
+    label: "Official Odoo Learning Partner",
+    description:
+      "Learning partnership with ERP ecosystem alignment and implementation capability.",
+    logo: "/odoo-logo.png",
+  },
+  {
+    name: "Beyond62",
+    label: "Beyond62 Bangkok Authorized Partner",
+    description:
+      "Authorized partnership for satellite IoT solutions and regional collaboration.",
+    logo: "/beyond22_logo.jpg",
+  },
+  {
+    name: "GalaxySpace",
+    label: "GalaxySpace Authorized Reseller for Bangladesh",
+    description:
+      "Bangladesh-market reseller and partner for satellite technology offerings.",
+    logo: "/GalaxySpace-logo.png",
+  },
+  {
+    name: "Huawei",
+    label: "Huawei Cloud & Enterprise Solutions Partner",
+    description:
+      "Cloud and enterprise solution alignment for infrastructure and business deployments.",
+    logo: "/huawei_logo.jpg",
   },
 ] as const;
 
 export const DEFAULT_SERVICES: Service[] = [
   {
     id: 1,
-    title: "Odoo Implementation",
-    slug: "odoo-implementation",
-    shortDesc: "Requirement workshops to go-live support.",
+    title: "Odoo Setup, Custom Modules & Business Systems",
+    slug: "odoo-setup-custom-modules-business-systems",
+    shortDesc:
+      "End-to-end Odoo setup, module delivery, custom development, migration, training, and operational rollout.",
     bullets: [
-      "Requirement workshops",
-      "Module configuration",
-      "Data migration",
-      "User setup & testing",
-      "Go-live support",
+      "Implementation, hosting, and go-live setup",
+      "Custom modules, workflows, and integrations",
+      "Migration, training, and long-term support",
+      "Reporting, analytics, and decision systems",
     ],
     displayOrder: 1,
   },
   {
     id: 2,
-    title: "Odoo Customization & Integration",
-    slug: "odoo-customization-integration",
-    shortDesc: "Custom modules, reports, and API integrations.",
+    title: "Software Development",
+    slug: "software-development",
+    shortDesc:
+      "Custom business software, internal systems, automation tools, and applications.",
     bullets: [
-      "Custom modules & automation",
-      "Advanced reporting",
-      "API integrations",
-      "Payment & third-party integrations",
+      "Business applications",
+      "Internal systems",
+      "Automation tools",
+      "Custom integrations",
     ],
     displayOrder: 2,
   },
   {
     id: 3,
-    title: "DevOps & Cloud Infrastructure",
-    slug: "devops-cloud-infrastructure",
-    shortDesc: "Reliable cloud hosting and automation.",
+    title: "Website Development",
+    slug: "website-development",
+    shortDesc:
+      "Corporate websites, portals, eCommerce platforms, and integrated web experiences.",
     bullets: [
-      "Cloud deployment & VPS setup",
-      "Containerized environments",
-      "CI/CD pipelines",
-      "Automated backups",
-      "Performance monitoring",
+      "Corporate websites",
+      "Portals",
+      "eCommerce",
+      "Integrated web experiences",
     ],
     displayOrder: 3,
   },
   {
     id: 4,
-    title: "Data Analytics & Business Intelligence",
-    slug: "data-analytics-business-intelligence",
-    shortDesc: "KPI dashboards and data-backed insights.",
+    title: "DevOps, Cloud & Infrastructure",
+    slug: "devops-cloud-infrastructure",
+    shortDesc:
+      "Deployment pipelines, monitoring, backup strategy, server setup, storage, and cloud operations.",
     bullets: [
-      "KPI dashboards",
-      "Sales & financial analysis",
-      "Inventory optimization insights",
-      "Custom reporting systems",
+      "DevOps pipelines",
+      "Monitoring, backup, and recovery",
+      "Cloud architecture",
+      "Servers, storage, and infrastructure operations",
     ],
     displayOrder: 4,
   },
   {
     id: 5,
-    title: "Personalized Predictive ML Models",
-    slug: "predictive-ml-models",
-    shortDesc: "Forecasting and prediction tailored to your ERP data.",
+    title: "Data Analytics, ML Models & IT Advisory",
+    slug: "data-analytics-ml-models-it-advisory",
+    shortDesc:
+      "Data analysis, custom ML models, cyber security review, and IT planning for future business decisions.",
     bullets: [
-      "Sales trend prediction",
-      "Demand forecasting",
-      "Customer churn analysis",
-      "Inventory forecasting models",
-      "Custom ML models trained on business data",
+      "ERP and business data analysis",
+      "Custom ML models for forecasting and decision support",
+      "Cyber security audit and requirement analysis",
+      "Technology planning and advisory",
     ],
     displayOrder: 5,
   },
 ];
 
 export const DEFAULT_MODULES: ModuleItem[] = [
-  { id: 1, title: "Accounting & Invoicing", benefit: "Accurate books and faster closing.", iconName: "Calculator", displayOrder: 1 },
-  { id: 2, title: "Sales & CRM", benefit: "Pipeline visibility and conversion tracking.", iconName: "Handshake", displayOrder: 2 },
-  { id: 3, title: "Inventory & Warehouse", benefit: "Live stock and reorder control.", iconName: "Boxes", displayOrder: 3 },
-  { id: 4, title: "Purchase", benefit: "Smarter vendor and procurement workflows.", iconName: "ShoppingCart", displayOrder: 4 },
-  { id: 5, title: "HR & Payroll", benefit: "Streamlined employee and salary operations.", iconName: "Users", displayOrder: 5 },
-  { id: 6, title: "POS", benefit: "Quick checkout with unified reporting.", iconName: "ScanLine", displayOrder: 6 },
-  { id: 7, title: "Manufacturing (MRP)", benefit: "Production planning with traceability.", iconName: "Factory", displayOrder: 7 },
-  { id: 8, title: "Project & Timesheets", benefit: "Deliver projects on time and budget.", iconName: "Clock3", displayOrder: 8 },
-  { id: 9, title: "Website & eCommerce", benefit: "Integrated storefront and order flow.", iconName: "Globe", displayOrder: 9 },
+  {
+    id: 1,
+    title: "Odoo ERP",
+    benefit:
+      "Setup, customization, migration, training, and support for core business operations.",
+    iconName: "Calculator",
+    displayOrder: 1,
+  },
+  {
+    id: 2,
+    title: "Applications",
+    benefit:
+      "Custom softwares for SMEs and also for education institutes, hospitals, agriculture, and more. AI Solutions & Data-Driven Business Decision Making: Leverage AI solutions and data-driven models to make informed business decisions. Vision-Based AI Projects: Implement AI-powered surveillance, auto-attendance, and more, using integration with CCTV and other systems.",
+    iconName: "Handshake",
+    displayOrder: 2,
+  },
+  {
+    id: 3,
+    title: "Business Websites",
+    benefit:
+      "Corporate websites, portals, eCommerce, and customer-facing digital experiences.",
+    iconName: "Globe",
+    displayOrder: 3,
+  },
+  {
+    id: 4,
+    title: "Cloud & DevOps",
+    benefit:
+      "Deployment pipelines, hosting, monitoring, backup, and day-to-day cloud operations.",
+    iconName: "ShoppingCart",
+    displayOrder: 4,
+  },
+  {
+    id: 5,
+    title: "Consultancy as a Service (Business)",
+    benefit:
+      "Specialized consultancy for turnkey, end-to-end business enhancement tailored to the UAE market.",
+    iconName: "Boxes",
+    displayOrder: 5,
+  },
+  {
+    id: 6,
+    title: "Cyber Security Audit",
+    benefit:
+      "Security assessment, posture review, risk identification, and improvement guidance. AI-Powered Surveillance & Security: Enhance your security infrastructure with AI surveillance systems integrated with CCTV and other smart devices.",
+    iconName: "ScanLine",
+    displayOrder: 6,
+  },
+  {
+    id: 7,
+    title: "IT Training",
+    benefit:
+      "User training, team enablement, and practical knowledge transfer for business systems.",
+    iconName: "Users",
+    displayOrder: 7,
+  },
+  {
+    id: 8,
+    title: "Consultancy as a Service (Government)",
+    benefit:
+      "Expert consultancy for government agencies looking to modernize, automate, and optimize their operations.",
+    iconName: "Clock3",
+    displayOrder: 8,
+  },
+  {
+    id: 9,
+    title: "Satellite IoT Solutions",
+    benefit:
+      "Partner-led connectivity and specialized satellite-enabled solutions for Bangladesh.",
+    iconName: "Factory",
+    displayOrder: 9,
+  },
 ];
 
-export const WHY_BLUBIT = [
-  "Local Implementation Team in Bangladesh",
-  "Bangla & English Training",
-  "Secure Cloud Hosting & Automated Backups",
-  "Structured Implementation Methodology",
-  "Fast Support with Clear SLAs",
-  "Migration from Excel & Legacy Systems",
+export const WHY_BLUE_ORBIT = [
+  "Official Odoo learning partnership with implementation capability",
+  "Bangladesh market understanding for SME and enterprise delivery",
+  "Capability across software, cloud, infrastructure, audit, and training",
+  "Authorized strategic partnerships in satellite and enterprise solutions",
+  "Requirement analysis and implementation discipline from planning to rollout",
+  "Cross-functional execution instead of fragmented vendor coordination",
 ];
 
 export const PROCESS_STEPS = [
-  "Discovery Workshop",
-  "Solution Blueprint",
-  "Configuration & Data Migration",
-  "Custom Development",
-  "Testing & UAT",
-  "Go-Live",
-  "Ongoing Support",
+  "Business Discovery",
+  "Requirement Analysis",
+  "Solution Design",
+  "Supply / Build / Configure",
+  "Testing & Validation",
+  "Go-Live / Handover",
+  "Training & Support",
 ];
 
 export const DEFAULT_PROOF_STATS: ProofStat[] = [
-  { id: 1, label: "Go-lives completed", value: "45+", displayOrder: 1 },
-  { id: 2, label: "Average delivery speed-up", value: "32%", displayOrder: 2 },
-  { id: 3, label: "Support SLA adherence", value: "99.2%", displayOrder: 3 },
-  { id: 4, label: "Client retention", value: "93%", displayOrder: 4 },
+  { id: 1, label: "Projects Supported", value: "50+", displayOrder: 1 },
+  { id: 2, label: "Organizations Trained", value: "20+", displayOrder: 2 },
+  { id: 3, label: "Support Responsiveness", value: "99%", displayOrder: 3 },
+  { id: 4, label: "Strategic Partnerships", value: "4", displayOrder: 4 },
+  {
+    id: 5,
+    label: "Bangladesh-Focused Delivery",
+    value: "100%",
+    displayOrder: 5,
+  },
 ];
+
+export const PARTNERSHIPS = [
+  {
+    name: "Odoo",
+    title: "Official learning partnership and ERP ecosystem alignment.",
+    logo: "/odoo-logo.png",
+  },
+  {
+    name: "Beyond62 Bangkok",
+    title:
+      "Authorized partnership for satellite IoT solutions and regional collaboration.",
+    logo: "/beyond22_logo.jpg",
+  },
+  {
+    name: "GalaxySpace",
+    title:
+      "Authorized reseller and Bangladesh-market partner for satellite technology offerings.",
+    logo: "/GalaxySpace-logo.png",
+  },
+  {
+    name: "Huawei Cloud & Enterprise",
+    title:
+      "Cloud and enterprise solution alignment for business and infrastructure deployments.",
+    logo: null,
+  },
+] as const;
+
+export const INDUSTRIES = [
+  "Manufacturing",
+  "Retail & Distribution",
+  "Services",
+  "Trading Businesses",
+  "Education & Training",
+  "Health",
+  "Enterprise Operations",
+] as const;
 
 export const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
@@ -142,37 +311,39 @@ export const DEFAULT_TESTIMONIALS: Testimonial[] = [
     name: "Farhan Islam",
     role: "COO",
     company: "Delta Retail BD",
-    quote: "Blubit migrated us from spreadsheets to a clean Odoo workflow with minimal downtime.",
+    quote:
+      "Blue Orbit helped us align systems, infrastructure, and operational delivery under one implementation partner.",
   },
   {
     id: 2,
     name: "Nadia Rahman",
     role: "Finance Lead",
     company: "Orbit Fashion House",
-    quote: "Our finance, inventory, and POS now run in one system with reliable reporting.",
+    quote:
+      "From ERP planning to web and reporting needs, the execution felt structured and practical.",
   },
 ];
 
 export const DEFAULT_TEAM: TeamMember[] = [
   {
     id: 1,
-    name: "Tanmoy Hasan",
-    role: "ERP Solutions Architect",
-    bio: "Leads Odoo architecture and business process mapping for enterprise deployments.",
+    name: "Rezwan Anwar",
+    role: "CEO, Founder",
+    bio: "Visionary leader driving Blue Orbit's mission to deliver enterprise-grade technology solutions in Bangladesh.",
     photoUrl: "/placeholders/team-1.svg",
   },
   {
     id: 2,
-    name: "Maliha Anjum",
-    role: "DevOps Engineer",
-    bio: "Designs secure cloud infrastructure, backup strategy, and release automation.",
+    name: "Sachitra Halder",
+    role: "Technical Coordinator",
+    bio: "Ensures technical excellence and seamless coordination across all implementation and delivery projects.",
     photoUrl: "/placeholders/team-2.svg",
   },
   {
     id: 3,
-    name: "Raiyan Kabir",
-    role: "Data & BI Consultant",
-    bio: "Builds KPI dashboards, forecasting models, and executive reporting systems.",
+    name: "Muhaimin Rahman",
+    role: "Lead Business Analyst",
+    bio: "Specializes in understanding business requirements and translating them into strategic technical solutions.",
     photoUrl: "/placeholders/team-3.svg",
   },
 ];
@@ -185,7 +356,7 @@ export const DEFAULT_JOBS: Job[] = [
     location: "Dhaka, Bangladesh",
     type: "Full-time",
     description:
-      "Lead discovery workshops, map business processes, configure Odoo modules, and support UAT/go-live.",
+      "Lead business discovery, configure Odoo modules, support training, and guide implementation readiness.",
     isActive: true,
   },
   {
@@ -195,11 +366,10 @@ export const DEFAULT_JOBS: Job[] = [
     location: "Remote (Bangladesh)",
     type: "Full-time",
     description:
-      "Manage cloud infrastructure, CI/CD pipelines, monitoring, backups, and deployment reliability for ERP stacks.",
+      "Manage cloud operations, CI/CD, monitoring, and infrastructure reliability across enterprise workloads.",
     isActive: true,
   },
 ];
 
 export const TRUST_LINE =
-  "Accounting · CRM · Inventory · HR · POS · Manufacturing · eCommerce";
-
+  "Odoo | DevOps | Web Development | IT Audit | Cyber Security | Server & Storage | Satellite IoT";

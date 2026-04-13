@@ -1,10 +1,14 @@
 ﻿import { BarChart3, Briefcase, Building2, Mail, Newspaper, Users } from "lucide-react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { AdminLogoutButton } from "@/components/AdminLogoutButton";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { ADMIN_SESSION_COOKIE, verifyAdminSessionToken } from "@/lib/adminAuth";
 
 export const metadata = {
-  title: "Admin Dashboard | Blubit",
-  description: "Blubit admin portal dashboard.",
+  title: "Admin Dashboard | Blue Orbit Solutions",
+  description: "Blue Orbit Solutions admin portal dashboard.",
 };
 
 const metrics = [
@@ -23,38 +27,48 @@ const contentSections = [
   "Proof Stats",
 ];
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const cookieStore = await cookies();
+  const sessionToken = cookieStore.get(ADMIN_SESSION_COOKIE)?.value;
+
+  if (!sessionToken || !verifyAdminSessionToken(sessionToken)) {
+    redirect("/admin/login");
+  }
+
   return (
     <>
       <Navbar />
-      <main className="min-h-[calc(100vh-80px)] bg-orbit-dark px-4 py-10 sm:px-6 lg:px-8">
+      <main className="bg-ui-page min-h-[calc(100vh-80px)] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <header className="mb-8">
-            <h1 className="text-4xl font-bold text-white">Admin Dashboard</h1>
-            <p className="mt-2 text-gray-400">Manage website content and review captured leads.</p>
+          <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h1 className="text-ui-heading text-4xl font-bold">Admin Dashboard</h1>
+              <p className="text-ui-muted mt-2">Manage website content and review captured leads.</p>
+            </div>
+            <AdminLogoutButton />
           </header>
 
           <section className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {metrics.map((metric) => (
-              <article key={metric.label} className="rounded-xl border border-cyan-500/30 bg-orbit-card p-5">
+              <article key={metric.label} className="ui-card rounded-xl p-5">
                 <div className="mb-3 inline-flex rounded-lg border border-cyan-400/40 bg-cyan-400/10 p-2 text-cyan-300">
                   <metric.icon className="h-5 w-5" />
                 </div>
-                <p className="text-sm text-gray-400">{metric.label}</p>
+                <p className="text-ui-muted text-sm">{metric.label}</p>
                 <p className="mt-1 text-3xl font-bold text-cyan-300">{metric.value}</p>
               </article>
             ))}
           </section>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <section className="rounded-xl border border-cyan-500/30 bg-orbit-card p-6">
-              <h2 className="mb-4 text-xl font-bold text-white">Content Management</h2>
+            <section className="ui-card rounded-xl p-6">
+              <h2 className="text-ui-heading mb-4 text-xl font-bold">Content Management</h2>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {contentSections.map((item) => (
                   <button
                     key={item}
                     type="button"
-                    className="rounded-lg border border-cyan-500/25 bg-orbit-dark px-4 py-3 text-left text-sm text-gray-300 transition hover:border-cyan-400/50 hover:text-cyan-200"
+                    className="border-ui bg-ui-surface text-ui-body hover:border-ui-strong hover:text-ui-link rounded-lg border px-4 py-3 text-left text-sm transition"
                   >
                     {item}
                   </button>
@@ -62,8 +76,8 @@ export default function AdminDashboard() {
               </div>
             </section>
 
-            <section className="rounded-xl border border-cyan-500/30 bg-orbit-card p-6">
-              <h2 className="mb-4 text-xl font-bold text-white">Recent Lead Sources</h2>
+            <section className="ui-card rounded-xl p-6">
+              <h2 className="text-ui-heading mb-4 text-xl font-bold">Recent Lead Sources</h2>
               <div className="space-y-3">
                 {[
                   { source: "Request Quote", count: 8, icon: Building2 },
@@ -72,9 +86,9 @@ export default function AdminDashboard() {
                 ].map((item) => (
                   <div
                     key={item.source}
-                    className="flex items-center justify-between rounded-lg border border-cyan-500/25 bg-orbit-dark px-4 py-3"
+                    className="border-ui bg-ui-surface flex items-center justify-between rounded-lg border px-4 py-3"
                   >
-                    <span className="inline-flex items-center gap-2 text-gray-300">
+                    <span className="text-ui-body inline-flex items-center gap-2">
                       <item.icon className="h-4 w-4 text-cyan-300" />
                       {item.source}
                     </span>

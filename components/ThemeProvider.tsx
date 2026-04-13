@@ -21,24 +21,33 @@ function applyTheme(theme: Theme) {
   html.classList.add(theme);
 }
 
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") {
+    return "dark";
+  }
+
+  const saved = window.localStorage.getItem("blue-orbit-theme") as Theme | null;
+  const legacy = window.localStorage.getItem("blubit-theme") as Theme | null;
+  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+  return saved ?? legacy ?? preferred;
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("blubit-theme") as Theme | null;
-    const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-    const nextTheme = saved ?? preferred;
-    setTheme(nextTheme);
-    applyTheme(nextTheme);
-  }, []);
+    applyTheme(theme);
+    window.localStorage.setItem("blue-orbit-theme", theme);
+    window.localStorage.removeItem("blubit-theme");
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme((prev) => {
       const next = prev === "dark" ? "light" : "dark";
       applyTheme(next);
-      window.localStorage.setItem("blubit-theme", next);
+      window.localStorage.setItem("blue-orbit-theme", next);
       return next;
     });
   };

@@ -2,6 +2,8 @@
 
 import { useState, FormEvent } from "react";
 import { Send } from "lucide-react";
+import clsx from "clsx";
+import { useTheme } from "@/components/ThemeProvider";
 
 export function QuoteForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,6 +12,8 @@ export function QuoteForm() {
   );
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [selectedModules, setSelectedModules] = useState<string[]>([]);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const services = [
     "Implementation",
@@ -28,6 +32,16 @@ export function QuoteForm() {
     "Manufacturing",
     "eCommerce",
   ];
+  const labelClass = clsx(
+    "mb-2.5 block text-sm font-semibold",
+    isDark ? "text-gray-300" : "text-ui-heading"
+  );
+  const inputClass = clsx(
+    "w-full rounded-lg px-4 py-2.5 text-sm transition-all",
+    isDark
+      ? "border border-cyan-500/30 bg-orbit-dark text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+      : "border border-ui bg-ui-card text-ui-body placeholder-gray-400 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/15 shadow-sm",
+  );
 
   function toggleService(service: string) {
     setSelectedServices((prev) =>
@@ -95,11 +109,17 @@ export function QuoteForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       {message && (
         <div
-          className={`rounded-lg p-4 text-sm ${
+          aria-live="polite"
+          className={clsx(
+            "rounded-lg p-4 text-sm",
             message.type === "success"
-              ? "border border-green-500/30 bg-green-500/10 text-green-300"
-              : "border border-red-500/30 bg-red-500/10 text-red-300"
-          }`}
+              ? isDark
+                ? "border border-green-500/30 bg-green-500/10 text-green-300"
+                : "border border-green-700/35 bg-green-50 text-green-800"
+              : isDark
+                ? "border border-red-500/30 bg-red-500/10 text-red-300"
+                : "border border-red-700/35 bg-red-50 text-red-800",
+          )}
         >
           {message.text}
         </div>
@@ -107,115 +127,121 @@ export function QuoteForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className={labelClass}>
             Full Name *
           </label>
           <input
             type="text"
             name="name"
             required
-            className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            className={inputClass}
             placeholder="Your name"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className={labelClass}>
             Email Address *
           </label>
           <input
             type="email"
             name="email"
             required
-            className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            className={inputClass}
             placeholder="your@email.com"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className={labelClass}>
             Company Name *
           </label>
           <input
             type="text"
             name="company"
             required
-            className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            className={inputClass}
             placeholder="Your company"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className={labelClass}>
             Phone Number
           </label>
           <input
             type="tel"
             name="phone"
-            className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            className={inputClass}
             placeholder="+880 1234 567890"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className={labelClass}>
             Industry
           </label>
           <input
             type="text"
             name="industry"
-            className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            className={inputClass}
             placeholder="e.g., Manufacturing, Retail"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className={labelClass}>
             Number of Users
           </label>
           <input
             type="number"
             name="usersCount"
             min="1"
-            className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            className={inputClass}
             placeholder="50"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-300 mb-3">
+        <label className={clsx("mb-3 block text-sm font-semibold", isDark ? "text-gray-300" : "text-ui-heading")}>
           Services Needed
         </label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {services.map((service) => (
-            <label key={service} className="flex items-center gap-2">
+            <label key={service} className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
                 checked={selectedServices.includes(service)}
                 onChange={() => toggleService(service)}
-                className="h-4 w-4 rounded border-cyan-500 bg-orbit-dark text-cyan-500 focus:ring-cyan-500"
+                className={clsx(
+                  "h-4 w-4 rounded border text-cyan-500 focus:ring-2 focus:ring-offset-1 transition-all",
+                  isDark ? "border-cyan-500 bg-orbit-dark focus:ring-cyan-500" : "border-ui bg-ui-card focus:ring-cyan-400"
+                )}
               />
-              <span className="text-sm text-gray-300">{service}</span>
+              <span className={clsx("text-sm", isDark ? "text-gray-300" : "text-ui-body")}>{service}</span>
             </label>
           ))}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-300 mb-3">
+        <label className={clsx("mb-3 block text-sm font-semibold", isDark ? "text-gray-300" : "text-ui-heading")}>
           Modules Interested In
         </label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {modules.map((module) => (
-            <label key={module} className="flex items-center gap-2">
+            <label key={module} className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
                 checked={selectedModules.includes(module)}
                 onChange={() => toggleModule(module)}
-                className="h-4 w-4 rounded border-cyan-500 bg-orbit-dark text-cyan-500 focus:ring-cyan-500"
+                className={clsx(
+                  "h-4 w-4 rounded border text-cyan-500 focus:ring-2 focus:ring-offset-1 transition-all",
+                  isDark ? "border-cyan-500 bg-orbit-dark focus:ring-cyan-500" : "border-ui bg-ui-card focus:ring-cyan-400"
+                )}
               />
-              <span className="text-sm text-gray-300">{module}</span>
+              <span className={clsx("text-sm", isDark ? "text-gray-300" : "text-ui-body")}>{module}</span>
             </label>
           ))}
         </div>
@@ -223,12 +249,12 @@ export function QuoteForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className={labelClass}>
             Implementation Timeline
           </label>
           <select
             name="timeline"
-            className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            className={inputClass}
           >
             <option value="">Select timeline</option>
             <option value="immediate">Immediate (0-1 months)</option>
@@ -239,12 +265,12 @@ export function QuoteForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className={labelClass}>
             Budget Range
           </label>
           <select
             name="budgetRange"
-            className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            className={inputClass}
           >
             <option value="">Select budget</option>
             <option value="under-100k">Under $100K</option>
@@ -256,13 +282,13 @@ export function QuoteForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
+        <label className={labelClass}>
           Additional Notes
         </label>
         <textarea
           name="notes"
           rows={4}
-          className="w-full px-4 py-2 rounded-lg border border-cyan-500/30 bg-orbit-dark text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+          className={clsx(inputClass, "resize-none")}
           placeholder="Tell us more about your project..."
         />
       </div>

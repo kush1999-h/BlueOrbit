@@ -25,45 +25,73 @@ export function Navbar() {
   const isDark = theme === "dark";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled((prev) => {
+        if (!prev && y > 36) return true;
+        if (prev && y < 12) return false;
+        return prev;
+      });
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [mobileMenuOpen]);
+
   return (
+    <>
     <nav
       className={clsx(
-        "sticky top-0 z-50 border-b transition",
+        "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ease-out",
         scrolled ? "backdrop-blur-md" : "backdrop-blur-0",
         isDark
           ? scrolled
             ? "border-cyan-500/25 bg-orbit-dark/88"
             : "border-cyan-500/15 bg-orbit-dark/72"
           : scrolled
-            ? "border-slate-300/70 bg-white/92"
-            : "border-slate-300/55 bg-white/84",
+            ? "border-ui bg-ui-surface shadow-[0_8px_20px_rgba(11,28,49,0.10)]"
+            : "border-ui bg-ui-page",
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <div
+        className={clsx(
+          "mx-auto flex items-center justify-between transition-[min-height,padding,max-width] duration-300 ease-out",
+          scrolled
+            ? "max-w-6xl px-3 py-1.5 sm:px-4 lg:px-5 min-h-[68px] md:min-h-[78px]"
+            : "max-w-7xl px-4 py-4 sm:px-6 lg:px-8 min-h-[88px] md:min-h-[104px]",
+        )}
+      >
         <Link href="/" className="flex flex-shrink-0 items-center gap-2">
-          <LogoSVG className="h-[3.5rem] md:h-[4.5rem]" />
+          <LogoSVG className={clsx("transition-[height] duration-300 ease-out", scrolled ? "h-[2.7rem] md:h-[3.25rem]" : "h-[3.5rem] md:h-[4.5rem]")} />
         </Link>
 
-        <div className="hidden gap-8 md:flex">
+        <div className={clsx("hidden md:flex transition-[gap] duration-300 ease-out", scrolled ? "gap-5" : "gap-8")}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={clsx(
-                "relative text-sm font-medium transition",
+                "relative font-medium transition",
+                scrolled ? "text-[13px]" : "text-sm",
                 pathname === link.href
                   ? isDark
                     ? "text-cyan-200"
-                    : "text-cyan-800"
+                    : "text-ui-heading"
                   : isDark
                     ? "text-gray-300 hover:text-cyan-300"
-                    : "text-slate-700 hover:text-cyan-700",
+                    : "text-ui-body hover:text-ui-link",
               )}
             >
               {link.label}
@@ -71,7 +99,7 @@ export function Navbar() {
                 <span
                   className={clsx(
                     "absolute -bottom-1 left-0 h-0.5 w-full rounded-full",
-                    isDark ? "bg-cyan-300" : "bg-cyan-700",
+                    isDark ? "bg-cyan-300" : "bg-sky-800",
                   )}
                 />
               )}
@@ -79,12 +107,13 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className={clsx("flex items-center transition-[gap] duration-300 ease-out", scrolled ? "gap-2.5" : "gap-4")}>
           <ThemeToggle />
           <Link
             href="/request-quote"
             className={clsx(
-              "hidden rounded-lg px-4 py-2 font-medium text-white transition sm:inline-block",
+              "hidden rounded-lg font-medium text-white transition sm:inline-block",
+              scrolled ? "px-3.5 py-1 text-[13px]" : "px-4 py-2 text-sm",
               isDark
                 ? "bg-gradient-to-r from-cyan-500 to-cyan-400 hover:shadow-glow-cyan-lg"
                 : "bg-slate-900 hover:bg-slate-800",
@@ -99,8 +128,11 @@ export function Navbar() {
               "inline-flex items-center justify-center rounded-lg border p-2 md:hidden",
               isDark
                 ? "border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10"
-                : "border-slate-300/80 text-slate-700 hover:bg-slate-100",
+                : "border-ui text-ui-heading hover:border-ui-strong hover:bg-slate-100",
             )}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -109,11 +141,12 @@ export function Navbar() {
 
       {mobileMenuOpen && (
         <div
+          id="mobile-menu"
           className={clsx(
             "border-t backdrop-blur md:hidden",
             isDark
               ? "border-cyan-500/20 bg-orbit-dark/95"
-              : "border-slate-300/60 bg-white/95",
+              : "border-ui bg-ui-surface",
           )}
         >
           <div className="space-y-3 px-4 py-4">
@@ -125,7 +158,7 @@ export function Navbar() {
                   "block py-2 text-sm font-medium transition",
                   isDark
                     ? "text-gray-300 hover:text-cyan-300"
-                    : "text-slate-700 hover:text-cyan-700",
+                    : "text-ui-body hover:text-ui-link",
                 )}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -148,5 +181,7 @@ export function Navbar() {
         </div>
       )}
     </nav>
+    <div className="min-h-[88px] md:min-h-[104px]" aria-hidden="true" />
+    </>
   );
 }

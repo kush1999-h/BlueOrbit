@@ -16,7 +16,7 @@ export function ThemeToggle() {
         "inline-flex h-10 w-10 items-center justify-center rounded-full border transition",
         isDark
           ? "border-cyan-300/30 bg-white/5 text-cyan-100 hover:border-cyan-300/60 hover:bg-cyan-300/10"
-          : "border-slate-300/80 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100",
+          : "border-ui bg-ui-elevated text-ui-body hover:border-ui-strong hover:bg-ui-card",
       )}
       aria-label="Toggle theme"
     >

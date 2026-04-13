@@ -60,6 +60,11 @@ SMTP_PORT=587
 SMTP_USER=your-user
 SMTP_PASS=your-pass
 SMTP_FROM=notifications@your-domain.com
+
+# Admin auth
+ADMIN_EMAIL=admin@your-domain.com
+ADMIN_PASSWORD_HASH=<bcrypt-hash>
+ADMIN_SESSION_SECRET=<long-random-secret>
 ```
 
 ## MySQL

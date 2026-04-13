@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import clsx from "clsx";
+import { compactSectionSpacing, primaryButton, secondaryButton, sectionContainer, sectionEyebrow, sectionTitle, surfaceCard } from "@/lib/homepageStyles";
 import { useTheme } from "@/components/ThemeProvider";
 
 export function CTABanner() {
@@ -9,47 +10,33 @@ export function CTABanner() {
   const isDark = theme === "dark";
 
   return (
-    <section
-      className={clsx(
-        "border-y py-16 md:py-24",
-        isDark
-          ? "border-cyan-500/30 bg-gradient-to-r from-orbit-dark via-cyan-950/30 to-orbit-dark"
-          : "border-cyan-700/20 bg-gradient-to-r from-slate-50 via-cyan-50 to-slate-50",
-      )}
-    >
-      <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <h2 className={clsx("mb-4 text-4xl font-bold md:text-5xl", isDark ? "text-white" : "text-slate-900")}>
-          Ready to Implement Odoo in Your Business?
-        </h2>
-        <p className={clsx("mx-auto mb-8 max-w-2xl text-lg", isDark ? "text-gray-300" : "text-slate-600")}>
-          Receive a structured proposal within 24-48 hours. Let us map the right ERP plan for your team.
-        </p>
-
-        <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          <Link
-            href="/request-quote"
-            className={clsx(
-              "rounded-lg px-8 py-4 font-semibold text-white transition",
-              isDark
-                ? "bg-gradient-to-r from-cyan-500 to-cyan-400 hover:shadow-glow-cyan-lg"
-                : "bg-slate-900 hover:bg-slate-800",
-            )}
-          >
-            Get Started With a Quote
-          </Link>
-          <Link
-            href="/contact"
-            className={clsx(
-              "rounded-lg border-2 px-8 py-4 font-semibold transition",
-              isDark
-                ? "border-cyan-500 text-cyan-300 hover:bg-cyan-500/10"
-                : "border-cyan-700/35 text-cyan-900 hover:bg-cyan-100/60",
-            )}
-          >
-            Schedule a Call
-          </Link>
+    <section className={clsx("border-y", compactSectionSpacing, isDark ? "border-cyan-500/25 bg-[linear-gradient(120deg,#0b1725_0%,#0f2940_55%,#1ea7ff_100%)]" : "border-ui bg-[linear-gradient(120deg,#e5effa_0%,#dbe8f5_52%,#cfe0f1_100%)]")}>
+      <div className={clsx(sectionContainer, "grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr]")}>
+        <div>
+          <p className={clsx(sectionEyebrow, isDark ? "text-cyan-100" : "text-ui-link")}>Next Step</p>
+          <h2 className={clsx(sectionTitle, isDark ? "text-white" : "text-ui-heading")}>Planning ERP, infrastructure, software, or strategic technology work?</h2>
+          <p className={clsx("mt-5 max-w-2xl text-base leading-7 md:text-lg", isDark ? "text-slate-100/88" : "text-ui-body")}>
+            Tell us what you need and Blue Orbit will recommend the right solution path, delivery approach, and next step.
+          </p>
         </div>
-        <p className={clsx("mt-4 text-sm", isDark ? "text-cyan-200/85" : "text-cyan-900/80")}>Typical response time: 24-48 hours.</p>
+
+        <div className={surfaceCard(isDark, isDark ? "p-6 border-white/15 bg-black/20" : "p-6 bg-ui-elevated border-ui-strong")}>
+          <div className="flex flex-col gap-4">
+            <Link
+              href="/request-quote"
+              className={primaryButton(isDark, isDark ? "bg-white/12 hover:bg-white/18" : "")}
+            >
+              Request a Quote
+            </Link>
+            <Link
+              href="/contact"
+              className={secondaryButton(isDark, isDark ? "border-cyan-100/25 hover:bg-white/8" : "")}
+            >
+              Book a Consultation
+            </Link>
+          </div>
+          <p className={clsx("mt-4 text-center text-sm", isDark ? "text-cyan-100/85" : "text-ui-muted")}>Typical response time: 24-48 hours</p>
+        </div>
       </div>
     </section>
   );

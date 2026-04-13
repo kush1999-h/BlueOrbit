@@ -11,24 +11,24 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Blubit | Odoo Implementation & Customization in Bangladesh",
-    template: "%s | Blubit",
+    default: "Blue Orbit Solutions | ERP, Cloud, Software, and Infrastructure in Bangladesh",
+    template: "%s | Blue Orbit Solutions",
   },
   description:
-    "Complete ERP deployment, infrastructure, and intelligent business solutions with Blubit.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://blubit.com"),
+    "Blue Orbit Solutions delivers Odoo, software development, websites, DevOps, infrastructure, IT audit, training, and strategic technology solutions in Bangladesh.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://blueorbit.com"),
   openGraph: {
-    title: "Blubit | Odoo Implementation in Bangladesh",
+    title: "Blue Orbit Solutions | Technology Solutions in Bangladesh",
     description:
-      "Complete ERP deployment, infrastructure, and intelligent business solutions.",
+      "ERP, software, websites, cloud, infrastructure, audit, training, and strategic technology delivery for Bangladesh.",
     type: "website",
-    images: [{ url: "/blue-orbit.svg", width: 1200, height: 630, alt: "Blubit Blue Orbit" }],
+    images: [{ url: "/blue-orbit.svg", width: 1200, height: 630, alt: "Blue Orbit Solutions" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blubit | Odoo Implementation in Bangladesh",
+    title: "Blue Orbit Solutions | Technology Solutions in Bangladesh",
     description:
-      "Complete ERP deployment, infrastructure, and intelligent business solutions.",
+      "ERP, software, websites, cloud, infrastructure, audit, training, and strategic technology delivery for Bangladesh.",
   },
 };
 
@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} bg-orbit-dark font-sans text-gray-100 antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider>
           <LoadingOverlay />
           {children}
